@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module
+	version="2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	
+	<info module="esi" organisation="ee.ut" />
+	
+	<configurations>
+		<conf name="runtime"/>
+		<conf name="compile" extends="runtime"/>
+		<conf name="test" />
+	</configurations>
+	
+	<dependencies>
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="compile->default" />
+		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="runtime->default"/>
+		<dependency org="taglibs" name="standard" rev="1.1.2" conf="runtime->default"/>
+		<dependency org="commons-lang" name="commons-lang" rev="2.6" conf="runtime->default"/>
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.4" conf="runtime->default" />
+		
+		
+		<!-- dependency org="commons-dbcp" name="commons-dbcp" rev="1.4" conf="runtime->default" />
+		<dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="runtime->default" />
+		<dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.5" conf="gen->default"/>
+		<dependency org="javax.xml.bind" name="jaxb-api" rev="2.2.6" conf="gen->default"/>
+		<dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.5" conf="gen->default"/>
+		<dependency org="javax.servlet" name="jsp-api" rev="2.0" conf="compile->default"/>
+		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="runtime->default"/ -->
+	</dependencies>
+</ivy-module>

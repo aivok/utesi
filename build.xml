@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ut" default="deploy" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<property name="ivy.version" value="2.2.0" />
+	<property name="tomcat.home.dir" value="C:\apache-tomcat-7.0.26-windows-x86\apache-tomcat-7.0.26" />
+	<property name="deploy.dir" value="${tomcat.home.dir}\webapps" />
+	
+	<macrodef name="compile">
+        <attribute name="destdir" />
+    	<attribute name="srcdir" />
+    	<attribute name="classpathref" default="empty.path"/>
+        <sequential>
+        	<mkdir dir="@{destdir}"/>
+    		<javac
+    			classpathref="@{classpathref}"
+    			compiler="modern"
+    			debug="true"
+    			debuglevel="lines,vars,source"
+    			deprecation="true"
+    			destdir="@{destdir}"
+    			encoding="UTF-8"
+    			fork="false"
+    			includeantruntime="false"
+    			includejavaruntime="false"
+    			listfiles="true"
+    			nowarn="false"
+    			source="1.7"
+    			target="1.7"
+    			srcdir="@{srcdir}"
+    			/>
+        </sequential>
+    </macrodef>
+	
+	<target name="init-ivy">
+		<path id="ivy.lib.path">
+			<fileset dir="lib" includes="ivy-${ivy.version}.jar" />
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path" />
+	</target>
+	
+	<target name="init" depends="init-ivy" />
+	
+	<target name="deploy" depends="war" description="deploy">
+		<copy file="build/esi.war" todir="${deploy.dir}" />
+	</target>
+	
+	<target name="war" depends="build" description="war">
+		<zip destfile="build/esi.war" basedir="build/webapp" encoding="UTF-8" />
+	</target>
+	
+	<target name="build" depends="compile">
+		<copy
+			encoding="UTF-8"
+			outputencoding="UTF-8"
+			todir="build/webapp"
+			includeEmptyDirs="false"
+			overwrite="true">
+			<fileset dir="src/main/webapp"/>
+		</copy>
+		<copy file="src/main/webapp/WEB-INF/log4j.xml" todir="build/webapp/WEB-INF/classes" overwrite="true" />
+		<ivy:retrieve pattern="build/webapp/WEB-INF/lib/[artifact].[ext]" sync="false" type="jar,bundle" conf="runtime" file="ivy.xml"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<ivy:cachepath pathid="compile.classpath" conf="compile" />
+		<compile srcdir="src/main/java" destdir="build/webapp/WEB-INF/classes" classpathref="compile.classpath"/>
+	</target>
+	
+	<target name="test" depends="compile" description="test">
+	</target>
+	
+	<target name="clean" depends="init" description="clean">
+		<delete dir="build" />
+	</target>
+</project>
