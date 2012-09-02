@@ -16,4 +16,9 @@ public abstract class BossAcceptanceRequest {
 	public boolean equals(Object obj) {
 		return obj != null && obj instanceof BossAcceptanceRequest && ((BossAcceptanceRequest) obj).getId() == id;
 	}
+
+	@Override
+	public int hashCode() {
+		return id;
+	}
 }

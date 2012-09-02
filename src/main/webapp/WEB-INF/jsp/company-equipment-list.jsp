@@ -4,13 +4,13 @@
 <esi:company-page>
   <h1>Eq. list</h1>
   <div>
-  	<div><a href="boss/">Boss</a></div>
+  	<div><a href="boss/">Boss</a> | <a href="?action=requests">Rent requests</a></div>
   </div>
   <ul>
   	<c:forEach items="${equipments}" var="equipment">
-   	<li>
-   		<a href="?action=view&id=${equipment.id}"><c:out value="${equipment.name}" /></a>
-   	</li>
+	   	<li>
+	   		<a href="?action=view&id=${equipment.id}"><c:out value="${equipment.name}" /></a>
+	   	</li>
   	</c:forEach>
   </ul>
 </esi:company-page>
