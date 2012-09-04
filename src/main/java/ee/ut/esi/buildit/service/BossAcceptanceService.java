@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import ee.ut.esi.buildit.model.BossAcceptanceRequest;
-import ee.ut.esi.buildit.model.EquipmentRentRequest;
+import ee.ut.esi.buildit.model.HireRequest;
 
 public class BossAcceptanceService {
 	private static BossAcceptanceService instance = new BossAcceptanceService();
@@ -35,7 +35,7 @@ public class BossAcceptanceService {
 		for (BossAcceptanceRequest request : list) {
 			if (request.getId() == requestId) {
 				list.remove(request);
-				if (request instanceof EquipmentRentRequest) {
+				if (request instanceof HireRequest) {
 					equipmentService.setEquipmentRentAcceptance(requestId, accepted);
 				}
 				return;
