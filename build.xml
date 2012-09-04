@@ -23,8 +23,8 @@
     			includejavaruntime="false"
     			listfiles="true"
     			nowarn="false"
-    			source="1.7"
-    			target="1.7"
+    			source="1.6"
+    			target="1.6"
     			srcdir="@{srcdir}"
     			/>
         </sequential>

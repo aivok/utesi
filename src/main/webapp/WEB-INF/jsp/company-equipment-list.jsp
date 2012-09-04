@@ -9,7 +9,7 @@
   <ul>
   	<c:forEach items="${equipments}" var="equipment">
 	   	<li>
-	   		<a href="?action=view&id=${equipment.id}"><c:out value="${equipment.name}" /></a>
+	   		<a href="?action=view&id=${equipment.id}"><c:out value="${equipment.name} - ${equipment.priceStringWithUnit}" /></a>
 	   	</li>
   	</c:forEach>
   </ul>

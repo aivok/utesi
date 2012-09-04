@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ee.ut.esi.buildit.model.Equipment;
-import ee.ut.esi.buildit.service.EquipmentService;
+import ee.ut.esi.buildit.model.PriceListItem;
+import ee.ut.esi.buildit.service.PriceListService;
 
 public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,29 +30,29 @@ public class CompanyServlet extends HttpServlet {
 			return sdf;
 		}
 	};
-	private EquipmentService service;
+	private PriceListService service;
 	private String contextPath;
 
 	@Override
 	public void init(ServletConfig config) {
 		contextPath = config.getServletContext().getContextPath();
-		service = EquipmentService.getInstance();
+		service = PriceListService.getInstance();
 	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Equipment> list = service.getEquipmentList();
+		List<PriceListItem> list = service.getPriceList();
 		request.setAttribute("equipments", list);
 		String action = request.getParameter("action");
 		if ("view".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			PriceListItem item = findItem(list, getIntId(request.getParameter("id")));
 			if (item != null) {
 				request.setAttribute("item", item);
 				request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-view.jsp").include(request, response);
 				return;
 			}
 		} else if ("availability".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			PriceListItem item = findItem(list, getIntId(request.getParameter("id")));
 			if (item != null) {
 				request.setAttribute("item", item);
 				try {
@@ -68,7 +68,7 @@ public class CompanyServlet extends HttpServlet {
 				return;
 			}
 		} else if ("order".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			PriceListItem item = findItem(list, getIntId(request.getParameter("id")));
 			if (item != null) {
 				try {
 					Date startDate = df.get().parse(request.getParameter("startDate"));
@@ -103,8 +103,8 @@ public class CompanyServlet extends HttpServlet {
 		}
 	}
 
-	private Equipment findItem(List<Equipment> list, int id) {
-		for (Equipment item : list) {
+	private PriceListItem findItem(List<PriceListItem> list, int id) {
+		for (PriceListItem item : list) {
 			if (item.getId() == id) {
 				return item;
 			}

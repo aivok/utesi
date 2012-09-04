@@ -9,14 +9,14 @@ import ee.ut.esi.buildit.model.EquipmentRentRequest;
 
 public class BossAcceptanceService {
 	private static BossAcceptanceService instance = new BossAcceptanceService();
-	private final EquipmentService equipmentService;
+	private final PriceListService equipmentService;
 	private final List<BossAcceptanceRequest> list = new CopyOnWriteArrayList<BossAcceptanceRequest>();
 
 	private BossAcceptanceService() {
 		if (instance == null) {
 			instance = this;
 		}
-		equipmentService = EquipmentService.getInstance();
+		equipmentService = PriceListService.getInstance();
 	}
 
 	public static BossAcceptanceService getInstance() {

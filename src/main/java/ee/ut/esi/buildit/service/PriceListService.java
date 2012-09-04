@@ -1,44 +1,46 @@
 package ee.ut.esi.buildit.service;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import ee.ut.esi.buildit.model.Equipment;
+import ee.ut.esi.buildit.model.PriceListItem;
 import ee.ut.esi.buildit.model.EquipmentRentRequest;
+import ee.ut.esi.buildit.model.PriceListItem.RentUnit;
 
-public class EquipmentService {
+public class PriceListService {
 
-	private static EquipmentService instance = new EquipmentService();
+	private static PriceListService instance = new PriceListService();
 	private final BossAcceptanceService bossAcceptanceService;
 	private final List<EquipmentRentRequest> rentRequests = new CopyOnWriteArrayList<EquipmentRentRequest>();
 
-	private EquipmentService() {
+	private PriceListService() {
 		if (instance == null) {
 			instance = this;
 		}
 		bossAcceptanceService = BossAcceptanceService.getInstance();
 	}
 
-	public static EquipmentService getInstance() {
+	public static PriceListService getInstance() {
 		return instance;
 	}
 
-	public List<Equipment> getEquipmentList() {
-		return Arrays.asList(new Equipment("tractor", 1), new Equipment("wheelbarrow", 2));
+	public List<PriceListItem> getPriceList() {
+		return Arrays.asList(new PriceListItem("tractor", 1, new BigDecimal(100), RentUnit.HOUR), new PriceListItem("wheelbarrow", 2, new BigDecimal(5), RentUnit.DAY));
 	}
 
 	public List<EquipmentRentRequest> getRentRequests() {
 		return Collections.unmodifiableList(rentRequests);
 	}
 
-	public boolean isAvailable(Equipment item, Date startDate, Date endDate) {
+	public boolean isAvailable(PriceListItem item, Date startDate, Date endDate) {
 		return true;
 	}
 
-	public void order(Equipment item, Date startDate, Date endDate) {
+	public void order(PriceListItem item, Date startDate, Date endDate) {
 		EquipmentRentRequest request = new EquipmentRentRequest(item);
 		request.setStartDate(startDate);
 		request.setEndDate(endDate);

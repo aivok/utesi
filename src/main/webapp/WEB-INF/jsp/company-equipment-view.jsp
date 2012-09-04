@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="esi" tagdir="/WEB-INF/tags" %>
 <esi:company-page>
-  <h1><c:out value="${item.name}" /></h1>
+  <h1>Availability check: <c:out value="${item.name}" /></h1>
   <form method="post" action="?action=availability&id=${item.id}">
   	<c:if test="${isAvailable != null}">
   		<div>Is available: ${isAvailable}</div>

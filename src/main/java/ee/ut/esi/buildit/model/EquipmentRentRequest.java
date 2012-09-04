@@ -4,19 +4,19 @@ import java.util.Date;
 
 public class EquipmentRentRequest extends BossAcceptanceRequest {
 
-	private Equipment equipment;
+	private PriceListItem equipment;
 	private Date startDate;
 	private Date endDate;
 
-	public EquipmentRentRequest(Equipment equipment) {
+	public EquipmentRentRequest(PriceListItem equipment) {
 		this.equipment = equipment;
 	}
 
-	public Equipment getEquipment() {
+	public PriceListItem getEquipment() {
 		return equipment;
 	}
 
-	public void setEquipment(Equipment equipment) {
+	public void setEquipment(PriceListItem equipment) {
 		this.equipment = equipment;
 	}
 
