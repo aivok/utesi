@@ -3,6 +3,7 @@
 	<property name="ivy.version" value="2.2.0" />
 	<property name="tomcat.home.dir" value="C:\apache-tomcat-7.0.26-windows-x86\apache-tomcat-7.0.26" />
 	<property name="deploy.dir" value="${tomcat.home.dir}\webapps" />
+	<property environment="env" />
 	
 	<macrodef name="compile">
         <attribute name="destdir" />
@@ -23,8 +24,8 @@
     			includejavaruntime="false"
     			listfiles="true"
     			nowarn="false"
-    			source="1.7"
-    			target="1.7"
+    			source="1.6"
+    			target="1.6"
     			srcdir="@{srcdir}"
     			/>
         </sequential>
@@ -70,5 +71,15 @@
 	
 	<target name="clean" depends="init" description="clean">
 		<delete dir="build" />
+	</target>
+	
+	<target name="xjc">
+		<exec executable="${env.JAVA_HOME}/bin/xjc.exe">
+			<arg value="-d"/>
+			<arg value="src/main/java"/>
+			<arg value="-p"/>
+			<arg value="ee.ut.esi.buildit.ws.model"/>
+			<arg value="etc/service.xsd"/>
+		</exec>
 	</target>
 </project>

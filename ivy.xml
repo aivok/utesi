@@ -13,6 +13,7 @@
 	</configurations>
 	
 	<dependencies>
+		<dependency org="javax.ws.rs" name="javax.ws.rs-api" rev="2.0-m09" conf="compile->default" />
 		<dependency org="javax.servlet" name="servlet-api" rev="2.5" conf="compile->default" />
 		<dependency org="javax.servlet" name="jstl" rev="1.2" conf="runtime->default"/>
 		<dependency org="taglibs" name="standard" rev="1.1.2" conf="runtime->default"/>
