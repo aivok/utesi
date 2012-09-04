@@ -7,10 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.ServiceMode;
 
 import ee.ut.esi.buildit.service.BossAcceptanceService;
 
-public class BossServlet extends HttpServlet {
+public class WorksEngineerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private BossAcceptanceService service;
@@ -27,6 +28,6 @@ public class BossServlet extends HttpServlet {
 			service.setResponse(Integer.parseInt(id), Boolean.parseBoolean(request.getParameter("accept")));
 		}
 		request.setAttribute("requests", service.getRequests());
-		request.getRequestDispatcher("/WEB-INF/jsp/boss-request-list.jsp").include(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/works-engineer-request-list.jsp").include(request, response);
 	}
 }

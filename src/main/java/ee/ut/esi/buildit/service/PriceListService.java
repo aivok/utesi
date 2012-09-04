@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import ee.ut.esi.buildit.model.HireRequest.StatusEnum;
 import ee.ut.esi.buildit.model.PriceListItem;
 import ee.ut.esi.buildit.model.HireRequest;
 import ee.ut.esi.buildit.model.PriceListItem.RentUnit;
@@ -44,6 +45,7 @@ public class PriceListService {
 		HireRequest request = new HireRequest(item);
 		request.setStartDate(startDate);
 		request.setEndDate(endDate);
+		request.setStatus(StatusEnum.REQUESTED);
 		rentRequests.add(request);
 		bossAcceptanceService.askAccept(request);
 	}

@@ -4,7 +4,7 @@
 <esi:company-page>
   <h1>Eq. list</h1>
   <div>
-  	<div><a href="boss/">Boss</a> | <a href="?action=requests">Rent requests</a></div>
+  	<div><a href="boss/">Switch to works engineer view</a> | <a href="?action=requests">Rent requests</a></div>
   </div>
   <ul>
   	<c:forEach items="${equipments}" var="equipment">

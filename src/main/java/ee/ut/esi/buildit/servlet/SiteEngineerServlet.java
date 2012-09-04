@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
 import ee.ut.esi.buildit.model.PriceListItem;
 import ee.ut.esi.buildit.service.PriceListService;
 
-public class CompanyServlet extends HttpServlet {
+public class SiteEngineerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(CompanyServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(SiteEngineerServlet.class);
 	private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
 		@Override
 		protected DateFormat initialValue() {
@@ -48,7 +48,7 @@ public class CompanyServlet extends HttpServlet {
 			PriceListItem item = findItem(list, getIntId(request.getParameter("id")));
 			if (item != null) {
 				request.setAttribute("item", item);
-				request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-view.jsp").include(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/site-engineer-equipment-view.jsp").include(request, response);
 				return;
 			}
 		} else if ("availability".equals(action)) {
@@ -64,7 +64,7 @@ public class CompanyServlet extends HttpServlet {
 				} catch (ParseException e) {
 					log.info("Invalid start/end date format");
 				}
-				request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-view.jsp").include(request, response);
+				request.getRequestDispatcher("/WEB-INF/jsp/site-engineer-equipment-view.jsp").include(request, response);
 				return;
 			}
 		} else if ("order".equals(action)) {
@@ -83,16 +83,16 @@ public class CompanyServlet extends HttpServlet {
 			}
 		} else if ("requests".equals(action)) {
 			request.setAttribute("rentRequests", service.getRentRequests());
-			request.getRequestDispatcher("/WEB-INF/jsp/company-rent-requests.jsp").include(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/site-engineer-rent-requests.jsp").include(request, response);
 			return;
 		} else if ("cancelRentRequest".equals(action)) {
 			service.cancelEquipmentRentRequest(getIntId(request.getParameter("id")));
 			request.setAttribute("rentRequests", service.getRentRequests());
-			request.getRequestDispatcher("/WEB-INF/jsp/company-rent-requests.jsp").include(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/site-engineer-rent-requests.jsp").include(request, response);
 			return;
 		}
 
-		request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-list.jsp").include(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/site-engineer-equipment-list.jsp").include(request, response);
 	}
 
 	private int getIntId(String id) {

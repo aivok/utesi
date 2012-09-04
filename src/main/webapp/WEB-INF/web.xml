@@ -8,24 +8,24 @@
 	</listener>
 	
 	<servlet>
-		<servlet-name>ee.ut.esi.buildit.servlet.CompanyServlet</servlet-name>
-		<servlet-class>ee.ut.esi.buildit.servlet.CompanyServlet</servlet-class>
+		<servlet-name>ee.ut.esi.buildit.servlet.SiteEngineerServlet</servlet-name>
+		<servlet-class>ee.ut.esi.buildit.servlet.SiteEngineerServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet>
-		<servlet-name>ee.ut.esi.buildit.servlet.BossServlet</servlet-name>
-		<servlet-class>ee.ut.esi.buildit.servlet.BossServlet</servlet-class>
+		<servlet-name>ee.ut.esi.buildit.servlet.WorksEngineerServlet</servlet-name>
+		<servlet-class>ee.ut.esi.buildit.servlet.WorksEngineerServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>ee.ut.esi.buildit.servlet.CompanyServlet</servlet-name>
+		<servlet-name>ee.ut.esi.buildit.servlet.SiteEngineerServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
-		<servlet-name>ee.ut.esi.buildit.servlet.BossServlet</servlet-name>
+		<servlet-name>ee.ut.esi.buildit.servlet.WorksEngineerServlet</servlet-name>
 		<url-pattern>/boss/</url-pattern>
 	</servlet-mapping>
 </web-app>

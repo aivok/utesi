@@ -3,7 +3,7 @@
 <%@ taglib prefix="esi" tagdir="/WEB-INF/tags" %>
 <esi:company-page>
 	<h1>Request list</h1>
-	<div><a href="../">Company</a></div>
+	<div><a href="../">Switch to site engineer view</a></div>
 	<ul>
 	  	<c:forEach items="${requests}" var="req">
 		   	<li>
