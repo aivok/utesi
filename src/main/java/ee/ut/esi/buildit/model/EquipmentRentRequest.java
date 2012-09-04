@@ -1,9 +1,15 @@
 package ee.ut.esi.buildit.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EquipmentRentRequest extends BossAcceptanceRequest {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+public class EquipmentRentRequest extends BossAcceptanceRequest implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private Equipment equipment;
 	private Date startDate;
 	private Date endDate;
@@ -35,4 +41,5 @@ public class EquipmentRentRequest extends BossAcceptanceRequest {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
 }

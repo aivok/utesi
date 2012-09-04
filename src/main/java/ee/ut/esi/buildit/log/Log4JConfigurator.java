@@ -2,8 +2,8 @@ package ee.ut.esi.buildit.log;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
 import org.apache.log4j.xml.DOMConfigurator;
+
 
 public class Log4JConfigurator implements ServletContextListener {
 

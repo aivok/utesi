@@ -1,23 +1,14 @@
 package ee.ut.esi.buildit.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import ee.ut.esi.buildit.model.BossAcceptanceRequest;
-import ee.ut.esi.buildit.model.EquipmentRentRequest;
 
 public class BossAcceptanceService {
-	private static BossAcceptanceService instance = new BossAcceptanceService();
-	private final EquipmentService equipmentService;
-	private final List<BossAcceptanceRequest> list = new CopyOnWriteArrayList<BossAcceptanceRequest>();
-
-	private BossAcceptanceService() {
-		if (instance == null) {
-			instance = this;
-		}
-		equipmentService = EquipmentService.getInstance();
-	}
+	private static final BossAcceptanceService instance = new BossAcceptanceService();
+	private final List<BossAcceptanceRequest> list = new ArrayList<BossAcceptanceRequest>();
 
 	public static BossAcceptanceService getInstance() {
 		return instance;
@@ -35,10 +26,7 @@ public class BossAcceptanceService {
 		for (BossAcceptanceRequest request : list) {
 			if (request.getId() == requestId) {
 				list.remove(request);
-				if (request instanceof EquipmentRentRequest) {
-					equipmentService.setEquipmentRentAcceptance(requestId, accepted);
-				}
-				return;
+				break;
 			}
 		}
 	}

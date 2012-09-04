@@ -7,12 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,13 +32,15 @@ public class CompanyServlet extends HttpServlet {
 			return sdf;
 		}
 	};
+	
+	@EJB
 	private EquipmentService service;
 	private String contextPath;
 
 	@Override
 	public void init(ServletConfig config) {
 		contextPath = config.getServletContext().getContextPath();
-		service = EquipmentService.getInstance();
+		
 	}
 
 	@Override
@@ -45,14 +49,14 @@ public class CompanyServlet extends HttpServlet {
 		request.setAttribute("equipments", list);
 		String action = request.getParameter("action");
 		if ("view".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			Equipment item = findItem(list, getEquipmentId(request.getParameter("id")));
 			if (item != null) {
 				request.setAttribute("item", item);
 				request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-view.jsp").include(request, response);
 				return;
 			}
 		} else if ("availability".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			Equipment item = findItem(list, getEquipmentId(request.getParameter("id")));
 			if (item != null) {
 				request.setAttribute("item", item);
 				try {
@@ -68,7 +72,7 @@ public class CompanyServlet extends HttpServlet {
 				return;
 			}
 		} else if ("order".equals(action)) {
-			Equipment item = findItem(list, getIntId(request.getParameter("id")));
+			Equipment item = findItem(list, getEquipmentId(request.getParameter("id")));
 			if (item != null) {
 				try {
 					Date startDate = df.get().parse(request.getParameter("startDate"));
@@ -81,26 +85,15 @@ public class CompanyServlet extends HttpServlet {
 					log.info("Invalid start/end date format");
 				}
 			}
-		} else if ("requests".equals(action)) {
-			request.setAttribute("rentRequests", service.getRentRequests());
-			request.getRequestDispatcher("/WEB-INF/jsp/company-rent-requests.jsp").include(request, response);
-			return;
-		} else if ("cancelRentRequest".equals(action)) {
-			service.cancelEquipmentRentRequest(getIntId(request.getParameter("id")));
-			request.setAttribute("rentRequests", service.getRentRequests());
-			request.getRequestDispatcher("/WEB-INF/jsp/company-rent-requests.jsp").include(request, response);
-			return;
 		}
-
 		request.getRequestDispatcher("/WEB-INF/jsp/company-equipment-list.jsp").include(request, response);
 	}
 
-	private int getIntId(String id) {
-		try {
+	private int getEquipmentId(String id) {
+		if (!StringUtils.isEmpty(id) && StringUtils.isNumeric(id)) {
 			return Integer.parseInt(id);
-		} catch (NumberFormatException e) {
-			return -1;
 		}
+		return -1;
 	}
 
 	private Equipment findItem(List<Equipment> list, int id) {
