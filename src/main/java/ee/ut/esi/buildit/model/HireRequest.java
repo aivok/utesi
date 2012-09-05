@@ -8,10 +8,6 @@ public class HireRequest extends BossAcceptanceRequest {
 		REQUESTED("Requested"), // Hire request has been made site engineer/clerk
 		APPROVED("Approved"), // Hire request has been approved by works engineer
 		NOT_APPROVED("Not approved"); // Hire request has been disapproved by works engineer/supplier
-//		REJECTED, // Hire request has been rejected by site engineer/clerk
-//		SENT, // Hire request has been sent to supplier
-//		ACCEPTED, // Hire request has been accepted by supplier
-//		CANCELLED // Hire request has been cancelled by site engineer/clerk
 		
 		private String value;
 		private StatusEnum(String value){
