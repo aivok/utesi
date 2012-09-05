@@ -2,6 +2,7 @@ package ee.ut.esi.buildit.servlet;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +15,11 @@ import ee.ut.esi.buildit.service.BossAcceptanceService;
 public class WorksEngineerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
 	private BossAcceptanceService service;
 
 	@Override
 	public void init(ServletConfig conf) {
-		service = BossAcceptanceService.getInstance();
 	}
 
 	@Override

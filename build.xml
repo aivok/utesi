@@ -54,9 +54,14 @@
 			todir="build/webapp"
 			includeEmptyDirs="false"
 			overwrite="true">
-			<fileset dir="src/main/webapp"/>
+			<fileset dir="src/main/webapp">
+				<exclude name="META-INF"/>
+		    </fileset>
 		</copy>
 		<copy file="src/main/webapp/WEB-INF/log4j.xml" todir="build/webapp/WEB-INF/classes" overwrite="true" />
+		<copy todir="build/webapp/WEB-INF/classes/META-INF" overwrite="true">
+			<fileset dir="src/main/webapp/META-INF" />
+		</copy>
 		<ivy:retrieve pattern="build/webapp/WEB-INF/lib/[artifact].[ext]" sync="false" type="jar,bundle" conf="runtime" file="ivy.xml"/>
 	</target>
 	

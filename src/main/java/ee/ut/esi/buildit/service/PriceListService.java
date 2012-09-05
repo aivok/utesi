@@ -1,36 +1,38 @@
 package ee.ut.esi.buildit.service;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import ee.ut.esi.buildit.model.HireRequest.StatusEnum;
 import ee.ut.esi.buildit.model.PriceListItem;
 import ee.ut.esi.buildit.model.HireRequest;
-import ee.ut.esi.buildit.model.PriceListItem.RentUnit;
 
+@Stateless
 public class PriceListService {
 
-	private static PriceListService instance = new PriceListService();
-	private final BossAcceptanceService bossAcceptanceService;
+	@EJB
+	private BossAcceptanceService bossAcceptanceService;
 	private final List<HireRequest> rentRequests = new CopyOnWriteArrayList<HireRequest>();
-
-	private PriceListService() {
-		if (instance == null) {
-			instance = this;
-		}
-		bossAcceptanceService = BossAcceptanceService.getInstance();
+	
+	@PersistenceContext(unitName="PersistenceUnit")
+	EntityManager em;
+	
+	public  PriceListService() {
 	}
 
-	public static PriceListService getInstance() {
-		return instance;
-	}
-
+	@SuppressWarnings("unchecked")
 	public List<PriceListItem> getPriceList() {
-		return Arrays.asList(new PriceListItem("tractor", 1, new BigDecimal(100), RentUnit.HOUR), new PriceListItem("wheelbarrow", 2, new BigDecimal(5), RentUnit.DAY));
+//		return Arrays.asList(new PriceListItem("tractor", 1, new BigDecimal(100), RentUnit.HOUR), new PriceListItem("wheelbarrow", 2, new BigDecimal(5), RentUnit.DAY));
+		Query query = em.createQuery("SELECT e FROM PriceListItem e");
+	    return query.getResultList();
 	}
 
 	public List<HireRequest> getRentRequests() {

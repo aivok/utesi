@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,13 +31,14 @@ public class SiteEngineerServlet extends HttpServlet {
 			return sdf;
 		}
 	};
+	@EJB
 	private PriceListService service;
 	private String contextPath;
 
 	@Override
 	public void init(ServletConfig config) {
 		contextPath = config.getServletContext().getContextPath();
-		service = PriceListService.getInstance();
+//		service = PriceListService.getInstance();
 	}
 
 	@Override

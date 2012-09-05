@@ -3,5 +3,11 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=utesi&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
+	<classpathentry kind="var" path="GLASSFISH_HOME/glassfish/modules/javax.persistence.jar"/>
+	<classpathentry kind="var" path="GLASSFISH_HOME/glassfish/modules/javax.ejb.jar"/>
+	<classpathentry kind="var" path="GLASSFISH_HOME/glassfish/modules/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="build/webapp/WEB-INF/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="build/webapp/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="build/webapp/WEB-INF/lib/slf4j-log4j12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

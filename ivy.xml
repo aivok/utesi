@@ -20,8 +20,12 @@
 		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.4" conf="runtime->default" />
 		
 		
-		<!-- dependency org="commons-dbcp" name="commons-dbcp" rev="1.4" conf="runtime->default" />
+		<dependency org="javax.persistence" name="persistence-api" rev="1.0" conf="compile->default"/>
+		<dependency org="org.glassfish" name="javax.ejb" rev="3.1" conf="compile->default"/>
+		<dependency org="org.glassfish" name="javax.jms" rev="3.1" conf="compile->default"/>
 		<dependency org="mysql" name="mysql-connector-java" rev="5.1.18" conf="runtime->default" />
+		
+		<!-- dependency org="commons-dbcp" name="commons-dbcp" rev="1.4" conf="runtime->default" />
 		<dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.5" conf="gen->default"/>
 		<dependency org="javax.xml.bind" name="jaxb-api" rev="2.2.6" conf="gen->default"/>
 		<dependency org="com.sun.xml.bind" name="jaxb-impl" rev="2.2.5" conf="gen->default"/>
