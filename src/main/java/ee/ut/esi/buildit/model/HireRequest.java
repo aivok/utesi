@@ -27,7 +27,6 @@ public class HireRequest extends BossAcceptanceRequest {
 	private Date startDate;
 	private Date endDate;
 	private StatusEnum status;
-	private int referenceNr;
 
 	public HireRequest(PriceListItem priceListItem) {
 		this.priceListItem = priceListItem;
@@ -71,14 +70,6 @@ public class HireRequest extends BossAcceptanceRequest {
 
 	public void setStatus(StatusEnum status) {
 		this.status = status;
-	}
-
-	public int getReferenceNr() {
-		return referenceNr;
-	}
-
-	public void setReferenceNr(int referenceNr) {
-		this.referenceNr = referenceNr;
 	}
 
 }
