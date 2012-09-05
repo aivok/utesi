@@ -7,11 +7,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import ee.ut.esi.buildit.dao.HireRequestDAO;
 import ee.ut.esi.buildit.model.BossAcceptanceRequest;
 import ee.ut.esi.buildit.model.HireRequest;
 
 @Stateless
 public class BossAcceptanceService {
+	
+	@EJB
+	private HireRequestDAO hireRequestDAO;
+	
 	@EJB
 	private PriceListService equipmentService;
 	private final List<BossAcceptanceRequest> list = new CopyOnWriteArrayList<BossAcceptanceRequest>();
@@ -23,8 +28,8 @@ public class BossAcceptanceService {
 		list.add(obj);
 	}
 
-	public List<BossAcceptanceRequest> getRequests() {
-		return Collections.unmodifiableList(list);
+	public List<? extends BossAcceptanceRequest> getRequests() {
+		return hireRequestDAO.getHireRequests();
 	}
 
 	public void setResponse(int requestId, boolean accepted) {

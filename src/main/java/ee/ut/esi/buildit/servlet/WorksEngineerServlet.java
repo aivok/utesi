@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.ServiceMode;
 
+import ee.ut.esi.buildit.dao.HireRequestDAO;
 import ee.ut.esi.buildit.service.BossAcceptanceService;
 
 public class WorksEngineerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	@EJB
 	private BossAcceptanceService service;
 

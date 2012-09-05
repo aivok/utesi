@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ee.ut.esi.buildit.dao.HireRequestDAO;
+import ee.ut.esi.buildit.dao.PriceListDAO;
 import ee.ut.esi.buildit.model.HireRequest.StatusEnum;
 import ee.ut.esi.buildit.model.PriceListItem;
 import ee.ut.esi.buildit.model.HireRequest;
@@ -22,21 +24,22 @@ public class PriceListService {
 	private BossAcceptanceService bossAcceptanceService;
 	private final List<HireRequest> rentRequests = new CopyOnWriteArrayList<HireRequest>();
 	
-	@PersistenceContext(unitName="PersistenceUnit")
-	EntityManager em;
+	@EJB
+	PriceListDAO priceListDAO;
+	
+	@EJB
+	HireRequestDAO hireRequestDAO;
 	
 	public  PriceListService() {
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<PriceListItem> getPriceList() {
-//		return Arrays.asList(new PriceListItem("tractor", 1, new BigDecimal(100), RentUnit.HOUR), new PriceListItem("wheelbarrow", 2, new BigDecimal(5), RentUnit.DAY));
-		Query query = em.createQuery("SELECT e FROM PriceListItem e");
-	    return query.getResultList();
+		return priceListDAO.getPriceList();
 	}
 
 	public List<HireRequest> getRentRequests() {
-		return Collections.unmodifiableList(rentRequests);
+		return hireRequestDAO.getHireRequests();
 	}
 
 	public boolean isAvailable(PriceListItem item, Date startDate, Date endDate) {
@@ -48,8 +51,7 @@ public class PriceListService {
 		request.setStartDate(startDate);
 		request.setEndDate(endDate);
 		request.setStatus(StatusEnum.REQUESTED);
-		rentRequests.add(request);
-		bossAcceptanceService.askAccept(request);
+		hireRequestDAO.save(request);
 	}
 
 	public void setEquipmentRentAcceptance(int requestId, boolean accepted) {

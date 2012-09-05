@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -12,7 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="purchase_orders")
+@Table(name="hire_requests")
 public class HireRequest extends BossAcceptanceRequest {
 
 	public enum StatusEnum {
@@ -63,6 +65,7 @@ public class HireRequest extends BossAcceptanceRequest {
 		this.priceListItem = priceListItem;
 	}
 	
+	@Column(name="start_date")
 	@Temporal(TemporalType.DATE) 
 	public Date getStartDate() {
 		return startDate;
@@ -72,6 +75,7 @@ public class HireRequest extends BossAcceptanceRequest {
 		this.startDate = startDate;
 	}
 	
+	@Column(name="end_date")
 	@Temporal(TemporalType.DATE) 
 	public Date getEndDate() {
 		return endDate;
@@ -81,8 +85,8 @@ public class HireRequest extends BossAcceptanceRequest {
 		this.endDate = endDate;
 	}
 	
-//	@Column(name="status")
-	@Transient
+	@Column(name="status")
+	@Enumerated(EnumType.STRING)
 	public StatusEnum getStatus() {
 		return status;
 	}
