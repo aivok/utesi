@@ -1,15 +1,11 @@
 package ee.ut.esi.buildit.service;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import ee.ut.esi.buildit.dao.HireRequestDAO;
 import ee.ut.esi.buildit.dao.PriceListDAO;
@@ -30,7 +26,7 @@ public class PriceListService {
 	@EJB
 	HireRequestDAO hireRequestDAO;
 	
-	public  PriceListService() {
+	public PriceListService() {
 	}
 
 	@SuppressWarnings("unchecked")
